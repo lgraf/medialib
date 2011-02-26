@@ -1,0 +1,33 @@
+@CHARSET "UTF-8";
+
+body
+{
+	font-family:verdana, sans-serif;	
+	font-size:12px;
+}
+
+input
+{
+	padding:2px;	
+}
+
+.h1 
+{
+	font-size:1.2em;
+	font-weight:bold;
+}
+
+.default-margin-left
+{
+	margin-left:5px;
+}
+
+.media-table
+{
+	width:100%;
+}
+
+.input-msg-inline
+{
+	margin-left:5px;	
+}
