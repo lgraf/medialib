@@ -1,5 +1,9 @@
 package org.luca.medialib.jsf.listener;
 
+import static javax.faces.event.PhaseId.ANY_PHASE;
+import static javax.faces.event.PhaseId.RENDER_RESPONSE;
+import static javax.faces.event.PhaseId.RESTORE_VIEW;
+
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
@@ -10,6 +14,8 @@ import org.slf4j.LoggerFactory;
 
 /**
  * PhaseListener for debugging the JSF-Lifecycle.
+ * Note: It seems that listeners are shared between requests!
+ * So use this listener only in a controlled dev environment, never in production!
  * 
  * @author luc4
  */
@@ -26,8 +32,9 @@ public class TracePhaseListener implements PhaseListener
 	{
 		phaseTimer = System.currentTimeMillis();
 
-		if ( PhaseId.RESTORE_VIEW.equals( pe.getPhaseId() ) )
+		if ( RESTORE_VIEW.equals( pe.getPhaseId() ) )
 		{
+			requestTimer = 0;
 			log.debug( "+++ New Request started! +++" );
 		}
 
@@ -41,7 +48,7 @@ public class TracePhaseListener implements PhaseListener
 		requestTimer += phaseTimer;
 
 		log.debug( " End of JSF-Phase({})! [{}ms]", pe.getPhaseId(), phaseTimer );
-		if ( PhaseId.RENDER_RESPONSE.equals( pe.getPhaseId() ) )
+		if ( RENDER_RESPONSE.equals( pe.getPhaseId() ) )
 		{
 			log.debug( "+++ End of Request reached! [{}]ms +++", requestTimer );
 		}
@@ -50,7 +57,7 @@ public class TracePhaseListener implements PhaseListener
 	@Override
 	public PhaseId getPhaseId()
 	{
-		return PhaseId.ANY_PHASE;
+		return ANY_PHASE;
 	}
 
 }
