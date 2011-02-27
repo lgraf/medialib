@@ -24,6 +24,9 @@ public class EditVideoController
 	@Inject
 	private VideoContentService videoContentService;
 
+	@Inject
+	private VideoListModel videoListModel;
+
 	@PostConstruct
 	public void init()
 	{
@@ -33,6 +36,7 @@ public class EditVideoController
 	public String persist( VideoContent toPersist )
 	{
 		videoContentService.persist( toPersist );
+		videoListModel.getVideoList().add( toPersist );
 		log.debug( "new item {} persistet and added ...", toPersist );
 		return null;
 	}
