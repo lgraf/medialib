@@ -10,33 +10,31 @@
 
 <ui:composition template="./template/layout.xhtml">
 	<ui:define name="dialogs">
-		<h:form id="addPopupForm">
-			<rich:popupPanel id="addPopup"
+		<h:form id="ext-movie-search">
+			<rich:popupPanel id="search-popup"
 							 width="800" 
 							 height="300"
 							 resizeable="true"
 							 domElementAttachment="form"
-							 onbeforeshow="#{rich:element('searchStringMSG')}.style.display='none';">
-				<f:facet name="header">
-					Add Movie
-				</f:facet>
+							 onbeforeshow="#{rich:element('search-string-msg')}.style.display='none';">
+				<f:facet name="header">Add Movie</f:facet>
 				<f:facet name="controls">
-					<h:commandLink onclick="#{rich:component('addPopup')}.hide();return false;">
+					<h:commandLink id="close-search-popup" onclick="#{rich:component('search-popup')}.hide();return false;">
 						<h:graphicImage library="img" name="cross-small.png"/>
 					</h:commandLink>
 				</f:facet>
 				
-				<h:inputText id="searchString" value="#{externalMovieSearchController.searchString}">
+				<h:inputText id="search-string" value="#{externalMovieSearchController.searchString}">
 					<rich:validator/>
 				</h:inputText>
-				<h:commandButton value="search" action="#{externalMovieSearchController.search}" styleClass="default-margin-left">
-					<f:ajax execute="searchString" render="movieSearchResult searchStringMSG"/>
+				<h:commandButton id="search-btn" value="search" action="#{externalMovieSearchController.search}" styleClass="default-margin-left">
+					<f:ajax execute="search-string" render="search-result search-string-msg"/>
 				</h:commandButton>
-				<rich:message id="searchStringMSG" for="searchString" styleClass="input-msg-inline"/>
+				<rich:message id="search-string-msg" for="search-string" styleClass="input-msg-inline"/>
 				
 				<br/><br/>
 				
-				<rich:dataTable id="movieSearchResult" 
+				<rich:dataTable id="search-result" 
 								value="#{externalMovieSearchController.searchResult}" var="movie"
 								noDataLabel="No Results!"
 								styleClass="media-table">
@@ -50,10 +48,10 @@
 		        	</rich:column>
 		        	<rich:column>
 		        		<f:facet name="header">Action</f:facet>
-		        		<a4j:commandLink id="addMovie"
+		        		<a4j:commandLink id="add-search-result"
 		        				action="#{editVideoController.persist( movie )}"
-		        				render=":videoListForm:videoList"
-		        				oncomplete="#{rich:component('addPopup')}.hide();">
+		        				render=":video-overview:video-list"
+		        				oncomplete="#{rich:component('search-popup')}.hide();">
 		        			<h:graphicImage library="img" name="plus-button.png" alt="add"/>
 		        		</a4j:commandLink>
 		        	</rich:column>
@@ -63,8 +61,8 @@
 	</ui:define>
 	
 	<ui:define name="content">
-	    <h:form id="videoListForm">
-	        <rich:dataTable id="videoList" 
+	    <h:form id="video-overview">
+	        <rich:dataTable id="video-list" 
 	        		value="#{videoListModel.videoList}"
 	        		var="item"
 	        		noDataLabel="No videos found ..."
@@ -82,9 +80,10 @@
 	        <br/>
 	        
 	        <div style="text-align:right;">
-	        	<h:commandButton 
+	        	<h:commandButton
+	        		id="add-video-item"
 	        		value="Add Item"
-	        		onclick="#{rich:component('addPopupForm:addPopup')}.show();return false;"/>
+	        		onclick="#{rich:component('ext-movie-search:search-popup')}.show();return false;"/>
 	        </div>
 	    </h:form>
     </ui:define>
