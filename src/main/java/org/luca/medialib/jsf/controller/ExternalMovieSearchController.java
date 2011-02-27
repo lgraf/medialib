@@ -20,6 +20,10 @@ import be.verborgh.enterprise.context.ViewScoped;
 
 /**
  * TODO luc4: think about scope.
+ * ViewScope is needed because we use commandlinks in the table. We need the state for following
+ * requests to know the clicked row.
+ * 
+ * How we can avoid this? This will not scale well.
  * 
  * @author luc4
  */

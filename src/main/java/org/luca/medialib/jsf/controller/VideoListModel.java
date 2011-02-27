@@ -14,10 +14,19 @@ import org.slf4j.LoggerFactory;
 
 
 /**
+ * TODO luc4: think about scope.
+ * JSF restore/save the state for datatables on Phase 1/6!
+ * This implies to initialize the model on each request also when we use execute/render for ajax
+ * requests to "exclude" the table. For now we will use ViewScope to avoid the reinitialization on
+ * each request.
+ * 
+ * How we can avoid this? This will not scale well.
+ * 
  * @author luc4
  */
 @Named
 @RequestScoped
+//@ViewScoped
 public class VideoListModel
 {
 
