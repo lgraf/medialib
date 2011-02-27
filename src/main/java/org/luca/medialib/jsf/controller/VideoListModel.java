@@ -3,7 +3,6 @@ package org.luca.medialib.jsf.controller;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -11,6 +10,8 @@ import org.luca.medialib.domain.VideoContent;
 import org.luca.medialib.service.VideoContentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import be.verborgh.enterprise.context.ViewScoped;
 
 
 /**
@@ -25,8 +26,7 @@ import org.slf4j.LoggerFactory;
  * @author luc4
  */
 @Named
-@RequestScoped
-//@ViewScoped
+@ViewScoped
 public class VideoListModel
 {
 
