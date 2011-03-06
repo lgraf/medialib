@@ -12,7 +12,7 @@
      <title><ui:insert name="title">MediaLib</ui:insert></title>
      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
      
-     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssreset/reset-min.css"/>
+     <!--link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssreset/reset-min.css"/-->
      <h:outputStylesheet library="css" name="layout.css"/>
      <h:outputStylesheet library="css" name="default.css"/>
      
@@ -45,6 +45,11 @@
 		<div id="footer">
 			<span>v #{project['version']}</span>
 		</div>
+		
+		<a4j:outputPanel id="global-msgs-panel" ajaxRendered="true">
+			<h:messages id="global-msgs"/>
+		</a4j:outputPanel>
+		<a4j:log id="a4j-log" mode="popup"/>
 	</div>
 </h:body>
     
