@@ -50,7 +50,7 @@
 		        		<f:facet name="header">Action</f:facet>
 		        		<a4j:commandLink id="add-search-result"
 		        				action="#{editVideoController.persist( movie )}"
-		        				render=":video-overview:video-list"
+		        				render=":video-overview:video-list :video-overview:video-list-scroller"
 		        				oncomplete="#{rich:component('search-popup')}.hide();">
 		        			<h:graphicImage library="img" name="plus-button.png" alt="add"/>
 		        		</a4j:commandLink>
@@ -62,21 +62,22 @@
 	
 	<ui:define name="content">
 	    <h:form id="video-overview">
-	        <rich:dataTable id="video-list" 
-	        		value="#{videoListModel.videoList}"
+	        <rich:extendedDataTable id="video-list" 
+	        		value="#{videoListModel}"
 	        		var="item"
+	        		rows="10"
 	        		noDataLabel="No videos found ..."
 	        		styleClass="media-table">
-	        	<rich:column>
+	        	<rich:column id="id">
 	        		<f:facet name="header">ID</f:facet>
 	        		#{item.id}
 	        	</rich:column>
-	        	<rich:column>
+	        	<rich:column id="title">
 	        		<f:facet name="header">Title</f:facet>
 	        		#{item.title}
 	        	</rich:column>
-	        </rich:dataTable>
-	        
+	        </rich:extendedDataTable>
+	        <rich:dataScroller id="video-list-scroller" for="video-list" renderIfSinglePage="true"/>
 	        <br/>
 	        
 	        <div style="text-align:right;">

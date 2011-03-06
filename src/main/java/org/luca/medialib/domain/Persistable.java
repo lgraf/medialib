@@ -15,7 +15,7 @@ import javax.persistence.Version;
  * @author luc4
  */
 @MappedSuperclass
-abstract class Persistable implements Serializable
+public abstract class Persistable implements Identifiable, Serializable
 {
 
 	@Id
@@ -25,15 +25,18 @@ abstract class Persistable implements Serializable
 	@Version
 	private Long version;
 
+
 	public Long getId()
 	{
 		return id;
 	}
 
+
 	public Long getVersion()
 	{
 		return version;
 	}
+
 
 	public boolean isPersistent()
 	{
