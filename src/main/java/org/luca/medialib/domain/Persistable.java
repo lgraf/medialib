@@ -15,7 +15,7 @@ import javax.persistence.Version;
  * @author luc4
  */
 @MappedSuperclass
-public abstract class Persistable implements Identifiable, Serializable
+abstract class Persistable implements Identifiable, Serializable
 {
 
 	@Id
