@@ -1,6 +1,9 @@
 package org.luca.medialib.domain;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
+import javax.validation.constraints.Size;
 
 
 /**
@@ -12,14 +15,35 @@ import javax.persistence.Entity;
 public class Movie extends VideoContent
 {
 
-	public Movie()
+	@Lob
+	@Size( max = 65536 )
+	private String overview;
+
+	@Embedded
+	private Image poster;
+
+
+	public String getOverview()
 	{
-		super();
+		return overview;
 	}
 
-	public Movie( String title )
+
+	public void setOverview( String overview )
 	{
-		super( title );
+		this.overview = overview;
+	}
+
+
+	public Image getPoster()
+	{
+		return poster;
+	}
+
+
+	public void setPoster( Image poster )
+	{
+		this.poster = poster;
 	}
 
 }

@@ -1,11 +1,14 @@
 package org.luca.medialib.domain;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.Lob;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -34,68 +37,83 @@ abstract class Content extends Persistable
 	@Size( min = 2, max = 255 )
 	private String title;
 
-	@Size( max = 65536 )
-	@Lob
-	private String description;
+	@Temporal( TemporalType.DATE )
+	private Date releaseDate;
 
-	public Content()
-	{
-	}
+	private double runtime;
 
-	public Content( String title )
-	{
-		this.title = title;
-	}
 
 	public Medium getMedium()
 	{
 		return medium;
 	}
 
+
 	public void setMedium( Medium medium )
 	{
 		this.medium = medium;
 	}
+
 
 	public Format getFormat()
 	{
 		return format;
 	}
 
+
 	public void setFormat( Format format )
 	{
 		this.format = format;
 	}
+
 
 	public String getIsbn()
 	{
 		return isbn;
 	}
 
+
 	public void setIsbn( String isbn )
 	{
 		this.isbn = isbn;
 	}
+
 
 	public String getTitle()
 	{
 		return title;
 	}
 
+
 	public void setTitle( String title )
 	{
 		this.title = title;
 	}
 
-	public String getDescription()
+
+	public Date getReleaseDate()
 	{
-		return description;
+		return releaseDate;
 	}
 
-	public void setDescription( String description )
+
+	public void setReleaseDate( Date releaseDate )
 	{
-		this.description = description;
+		this.releaseDate = releaseDate;
 	}
+
+
+	public double getRuntime()
+	{
+		return runtime;
+	}
+
+
+	public void setRuntime( double runtime )
+	{
+		this.runtime = runtime;
+	}
+
 
 	@Override
 	public boolean equals( Object obj )
@@ -115,6 +133,7 @@ abstract class Content extends Persistable
 		}
 		return true;
 	}
+
 
 	@Override
 	public int hashCode()

@@ -12,14 +12,4 @@ import javax.persistence.Entity;
 public abstract class VideoContent extends Content
 {
 
-	public VideoContent()
-	{
-		super();
-	}
-
-	public VideoContent( String title )
-	{
-		super( title );
-	}
-
 }

@@ -12,13 +12,4 @@ import javax.persistence.Entity;
 public abstract class AudioContent extends Content
 {
 
-	public AudioContent()
-	{
-		super();
-	}
-
-	public AudioContent( String title )
-	{
-		super( title );
-	}
 }

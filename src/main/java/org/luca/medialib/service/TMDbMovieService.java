@@ -3,12 +3,15 @@ package org.luca.medialib.service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import net.sf.jtmdb.GeneralSettings;
+import net.sf.jtmdb.MoviePoster;
 
 import org.apache.commons.lang.StringUtils;
 import org.json.JSONException;
+import org.luca.medialib.domain.Image;
 import org.luca.medialib.domain.Movie;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,10 +28,12 @@ public class TMDbMovieService implements ExternalMovieService
 
 	private static final Logger log = LoggerFactory.getLogger( TMDbMovieService.class );
 
+
 	public TMDbMovieService()
 	{
 		GeneralSettings.setApiKey( "f170f66dcbeb2f9b278b631ed58cc7b2" );
 	}
+
 
 	@Override
 	public List<Movie> searchByTitle( String searchString )
@@ -41,7 +46,7 @@ public class TMDbMovieService implements ExternalMovieService
 		List<Movie> searchResult;
 		try
 		{
-			searchResult = convert( net.sf.jtmdb.Movie.search( searchString ) );
+			searchResult = convert( net.sf.jtmdb.Movie.deepSearch( searchString ) );
 			log.debug( "Found {} movies for string '{}'", searchResult.size(), searchString );
 		}
 		catch ( IOException e )
@@ -55,6 +60,7 @@ public class TMDbMovieService implements ExternalMovieService
 		return searchResult;
 	}
 
+
 	private Movie convert( net.sf.jtmdb.Movie base )
 	{
 		if ( null == base )
@@ -65,9 +71,23 @@ public class TMDbMovieService implements ExternalMovieService
 		Movie converted = new Movie();
 		//TODO luc4: add all related fields
 		converted.setTitle( base.getName() );
-		converted.setDescription( base.getOverview() );
+		converted.setReleaseDate( base.getReleasedDate() );
+		converted.setRuntime( base.getRuntime() );
+		converted.setOverview( base.getOverview() );
+
+		Iterator<MoviePoster> it = base.getImages().posters.iterator();
+		if ( it.hasNext() )
+		{
+			MoviePoster poster = base.getImages().posters.iterator().next();
+			Image moviePoster = new Image();
+			moviePoster.setName( poster.getID() );
+			moviePoster.setUrl( poster.getSmallestImage().toString() );
+			moviePoster.setDimension( poster.getSmallestImageDimension() );
+			converted.setPoster( moviePoster );
+		}
 		return converted;
 	}
+
 
 	private List<Movie> convert( List<net.sf.jtmdb.Movie> baseList )
 	{

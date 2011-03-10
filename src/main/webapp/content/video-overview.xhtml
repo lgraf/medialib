@@ -38,14 +38,20 @@
 								value="#{externalMovieSearchController.searchResult}" var="movie"
 								noDataLabel="No Results!"
 								styleClass="media-table">
+					<rich:column id="image">
+						<h:graphicImage rendered="#{!empty movie.poster}" url="#{movie.poster.url}"  width="#{movie.poster.width}" height="#{movie.poster.height}"/>
+		        	</rich:column>
+		        	
 		        	<rich:column>
 		        		<f:facet name="header">Title</f:facet>
 		        		<h:outputText value="#{movie.title}"/>
 		        	</rich:column>
+		        	
 		        	<rich:column>
-		        		<f:facet name="header">Description</f:facet>
-		        		<h:outputText value="#{movie.description}"/>
+		        		<f:facet name="header">Overview</f:facet>
+		        		<h:outputText value="#{movie.overview}"/>
 		        	</rich:column>
+		        	
 		        	<rich:column>
 		        		<f:facet name="header">Action</f:facet>
 		        		<a4j:commandLink id="add-search-result"
@@ -64,25 +70,46 @@
 	    <h:form id="video-overview">
 	        <rich:extendedDataTable id="video-list" 
 	        		value="#{videoListModel}"
-	        		var="item"
+	        		var="video"
 	        		rows="10"
 	        		noDataLabel="No videos found ..."
 	        		styleClass="media-table">
+	        	<ui:remove>
+        		<rich:column id="image">
+					<h:graphicImage rendered="#{!empty video.poster}" url="#{video.poster.url}"  width="#{video.poster.width}" height="#{video.poster.height}" style="width:#{video.poster.width};height:#{video.poster.height};"/>
+	        	</rich:column>
+				</ui:remove>
+				
 	        	<rich:column id="id">
 	        		<f:facet name="header">ID</f:facet>
-	        		#{item.id}
+	        		<h:outputText value="#{video.id}"/>
 	        	</rich:column>
+	        	
 	        	<rich:column id="title">
 	        		<f:facet name="header">Title</f:facet>
-	        		#{item.title}
+	        		<h:outputText value="#{video.title}"/>
+	        	</rich:column>
+	        	
+	        	<rich:column id="runtime">
+	        		<f:facet name="header">Runtime</f:facet>
+	        		<h:outputText value="#{video.runtime}">
+	        			<f:convertNumber integerOnly="true"/>
+	        		</h:outputText>
+	        		<h:outputText value=" minutes"/>
+	        	</rich:column>
+	        	
+	        	<rich:column id="releasedate">
+	        		<f:facet name="header">Release Date</f:facet>
+	        		<h:outputText value="#{video.releaseDate}">
+	        			<f:convertDateTime type="date"/>
+	        		</h:outputText>
 	        	</rich:column>
 	        </rich:extendedDataTable>
 	        <rich:dataScroller id="video-list-scroller" for="video-list" renderIfSinglePage="true"/>
 	        <br/>
 	        
 	        <div style="text-align:right;">
-	        	<h:commandButton
-	        		id="add-video-item"
+	        	<h:commandButton id="add-video-item"
 	        		value="Add Item"
 	        		onclick="#{rich:component('ext-movie-search:search-popup')}.show();return false;"/>
 	        </div>
