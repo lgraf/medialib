@@ -12,7 +12,7 @@
      <title><ui:insert name="title">MediaLib</ui:insert></title>
      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
      
-     <!--link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssreset/reset-min.css"/-->
+     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssreset/reset-min.css"/>
      <h:outputStylesheet library="css" name="layout.css"/>
      <h:outputStylesheet library="css" name="default.css"/>
      
@@ -30,6 +30,15 @@
 			<h:inputHidden id="maximumSeverity" value="#{facesContext.maximumSeverity.ordinal}"/>
 		</a4j:outputPanel>
 	</h:form>
+
+	<a4j:status id="global-ajax-status">
+		<f:facet name="start">
+			<div style="position:fixed;padding:5px;">
+				<h:graphicImage id="global-ajax-img" library="img" name="ajax-circle.gif" style="vertical-align:middle;"/>
+				<h:outputText id="global-ajax-msg" value="" styleClass="default-margin-left" style="vertical-align:middle;"/>
+			</div>
+		</f:facet>
+	</a4j:status>
 	
 	<ui:insert name="dialogs"/>
 	
