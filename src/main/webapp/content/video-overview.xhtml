@@ -68,7 +68,7 @@
 	
 	<ui:define name="content">
 	    <h:form id="video-overview">
-	        <rich:extendedDataTable id="video-list" 
+	        <rich:dataTable id="video-list" 
 	        		value="#{videoListModel}"
 	        		var="video"
 	        		rows="10"
@@ -104,7 +104,7 @@
 	        			<f:convertDateTime type="date"/>
 	        		</h:outputText>
 	        	</rich:column>
-	        </rich:extendedDataTable>
+	        </rich:dataTable>
 	        <rich:dataScroller id="video-list-scroller" for="video-list" renderIfSinglePage="true"/>
 	        <br/>
 	        

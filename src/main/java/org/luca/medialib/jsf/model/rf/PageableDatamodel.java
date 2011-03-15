@@ -159,7 +159,7 @@ abstract class PageableDatamodel<T extends Identifiable> extends ExtendedDataMod
 	@Override
 	public int getRowIndex()
 	{
-		return 0;
+		return -1;
 	}
 
 
