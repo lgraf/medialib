@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
@@ -16,6 +14,8 @@ import org.luca.medialib.service.ExternalMovieService;
 import org.luca.medialib.service.ExternalServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import be.verborgh.enterprise.context.ViewScoped;
 
 
 /**
@@ -43,14 +43,6 @@ public class ExternalMovieSearchController implements Serializable
 
 	private List<Movie> searchResult = Collections.emptyList();
 
-
-	@PostConstruct
-	private void init()
-	{
-		log.debug( "ExternalMovieSearchController get initialized!" );
-	}
-
-
 	public String search()
 	{
 		try
@@ -65,24 +57,20 @@ public class ExternalMovieSearchController implements Serializable
 		return null;
 	}
 
-
 	public String getSearchString()
 	{
 		return searchString;
 	}
-
 
 	public void setSearchString( String searchString )
 	{
 		this.searchString = searchString;
 	}
 
-
 	public List<Movie> getSearchResult()
 	{
 		return searchResult;
 	}
-
 
 	public void setSearchResult( List<Movie> searchResult )
 	{
