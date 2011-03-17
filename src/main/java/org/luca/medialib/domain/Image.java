@@ -75,7 +75,7 @@ public class Image
 	public void setDimension( Dimension dimension )
 	{
 		if ( null == dimension )
-			throw new IllegalArgumentException( "imension must be not null!" );
+			throw new IllegalArgumentException( "dimension must be not null!" );
 
 		width = dimension.width;
 		height = dimension.height;

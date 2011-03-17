@@ -1,5 +1,8 @@
 package org.luca.medialib.domain;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
@@ -20,6 +23,11 @@ public class Movie extends VideoContent
 	private String overview;
 
 	@Embedded
+	@AttributeOverrides( {
+			@AttributeOverride( name = "name", column = @Column( name = "poster_name" ) ),
+			@AttributeOverride( name = "url", column = @Column( name = "poster_url" ) ),
+			@AttributeOverride( name = "width", column = @Column( name = "poster_width" ) ),
+			@AttributeOverride( name = "height", column = @Column( name = "poster_height" ) ) } )
 	private Image poster;
 
 
