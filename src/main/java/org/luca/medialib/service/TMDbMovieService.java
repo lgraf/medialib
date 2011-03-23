@@ -1,6 +1,7 @@
 package org.luca.medialib.service;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -23,7 +24,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author luc4
  */
-public class TMDbMovieService implements ExternalMovieService
+public class TMDbMovieService implements ExternalMovieService, Serializable
 {
 
 	private static final Logger log = LoggerFactory.getLogger( TMDbMovieService.class );
