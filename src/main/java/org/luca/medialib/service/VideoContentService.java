@@ -22,7 +22,7 @@ public class VideoContentService
 
 	public Long count()
 	{
-		return em.createQuery( "SELECT count(c) FROM VideoContent c ORDER BY c.title", Long.class )
+		return em.createQuery( "SELECT count(c) FROM VideoContent c", Long.class )
 				.getSingleResult();
 	}
 
@@ -36,7 +36,8 @@ public class VideoContentService
 
 	public List<VideoContent> findAll()
 	{
-		return em.createQuery( "SELECT c FROM VideoContent c", VideoContent.class ).getResultList();
+		return em.createQuery( "SELECT c FROM VideoContent c ORDER BY c.title", VideoContent.class )
+				.getResultList();
 	}
 
 
