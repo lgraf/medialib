@@ -2,6 +2,7 @@ package org.luca.medialib.jsf.model.rf;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -32,6 +33,13 @@ public class VideoListModel extends PageableDatamodel<VideoContent>
 
 	@Inject
 	private VideoContentService videoContentService;
+
+
+	@PostConstruct
+	private void init()
+	{
+		log.debug( "Initialize via @PostConstruct ..." );
+	}
 
 
 	@Override

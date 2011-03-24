@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
@@ -43,6 +44,14 @@ public class ExternalMovieSearchController implements Serializable
 
 	private List<Movie> searchResult = Collections.emptyList();
 
+
+	@PostConstruct
+	private void init()
+	{
+		log.debug( "Initialize via @PostConstruct ..." );
+	}
+
+
 	public String search()
 	{
 		try
@@ -57,20 +66,24 @@ public class ExternalMovieSearchController implements Serializable
 		return null;
 	}
 
+
 	public String getSearchString()
 	{
 		return searchString;
 	}
+
 
 	public void setSearchString( String searchString )
 	{
 		this.searchString = searchString;
 	}
 
+
 	public List<Movie> getSearchResult()
 	{
 		return searchResult;
 	}
+
 
 	public void setSearchResult( List<Movie> searchResult )
 	{
