@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+
+<ui:composition template="../template/layout.xhtml">
+	<ui:define name="dialogs">
+		<ui:include src="./dialog/external-search.xhtml"/>
+	</ui:define>
+	
+	<ui:define name="content">
+	    <h:form id="video-overview">
+	        <rich:dataTable id="video-list" 
+	        		value="#{videoListModel}"
+	        		var="video"
+	        		rows="10"
+	        		noDataLabel="No videos found ..."
+	        		styleClass="media-table">
+	        	<ui:remove>
+        		<rich:column id="image">
+					<h:graphicImage rendered="#{!empty video.poster}" url="#{video.poster.url}"  width="#{video.poster.width}" height="#{video.poster.height}" style="width:#{video.poster.width};height:#{video.poster.height};"/>
+	        	</rich:column>
+				</ui:remove>
+				
+	        	<rich:column id="id">
+	        		<f:facet name="header">ID</f:facet>
+	        		<h:outputText value="#{video.id}"/>
+	        	</rich:column>
+	        	
+	        	<rich:column id="title">
+	        		<f:facet name="header">Title</f:facet>
+	        		<h:outputText value="#{video.title}"/>
+	        	</rich:column>
+	        	
+	        	<rich:column id="runtime">
+	        		<f:facet name="header">Runtime</f:facet>
+	        		<h:outputText value="#{video.runtime}">
+	        			<f:convertNumber integerOnly="true"/>
+	        		</h:outputText>
+	        		<h:outputText value=" minutes"/>
+	        	</rich:column>
+	        	
+	        	<rich:column id="releasedate">
+	        		<f:facet name="header">Release Date</f:facet>
+	        		<h:outputText value="#{video.releaseDate}">
+	        			<f:convertDateTime type="date"/>
+	        		</h:outputText>
+	        	</rich:column>
+	        	
+	        	<rich:column id="detail-action">
+	        		<a4j:commandButton id="select-video" value="show" 
+	        			action="#{videoDetailController.setSelected( video )}" 
+	        			execute="@this"
+	        			render="video-detail:detail-video-popup"
+	        			oncomplete="#{rich:component('video-detail:detail-video-popup')}.show();return false;"/>
+	        	</rich:column>
+	        </rich:dataTable>
+	        <rich:dataScroller id="video-list-scroller" for="video-list" renderIfSinglePage="true"/>
+	        <br/>
+
+	        <div style="text-align:right;">
+	        	<h:commandButton id="add-video-item"
+	        		value="Add Item"
+	        		onclick="#{rich:component('ext-movie-search:search-popup')}.show();return false;"/>
+	        </div>
+	    </h:form>
+    </ui:define>
+</ui:composition>
+    
+</html>

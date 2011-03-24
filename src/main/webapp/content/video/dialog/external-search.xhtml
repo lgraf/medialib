@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+
+<ui:composition>
+	<h:form id="ext-movie-search">
+		<rich:popupPanel id="search-popup"
+						 width="800" 
+						 height="300"
+						 resizeable="true"
+						 domElementAttachment="form"
+						 onbeforeshow="#{rich:element('search-string-msg')}.style.display='none';">
+			<f:facet name="header">Add Movie</f:facet>
+			<f:facet name="controls">
+				<h:commandLink id="close-search-popup" onclick="#{rich:component('search-popup')}.hide();return false;">
+					<h:graphicImage library="img" name="cross-small.png"/>
+				</h:commandLink>
+			</f:facet>
+			
+			<h:inputText id="search-string" value="#{externalMovieSearchController.searchString}">
+				<rich:validator/>
+			</h:inputText>
+			<h:commandButton id="search-btn" value="search" action="#{externalMovieSearchController.search}" styleClass="default-margin-left">
+				<f:ajax execute="search-string" render="search-result search-string-msg"/>
+			</h:commandButton>
+			<rich:message id="search-string-msg" for="search-string" styleClass="input-msg-inline"/>
+			
+			<br/><br/>
+			
+			<rich:dataTable id="search-result" 
+							value="#{externalMovieSearchController.searchResult}" var="movie"
+							noDataLabel="No Results!"
+							styleClass="media-table">
+				<rich:column id="image">
+					<h:graphicImage rendered="#{!empty movie.poster}" url="#{movie.poster.url}"  width="#{movie.poster.width}" height="#{movie.poster.height}"/>
+	        	</rich:column>
+	        	
+	        	<rich:column>
+	        		<f:facet name="header">Title</f:facet>
+	        		<h:outputText value="#{movie.title}"/>
+	        	</rich:column>
+	        	
+	        	<rich:column>
+	        		<f:facet name="header">Overview</f:facet>
+	        		<h:outputText value="#{movie.overview}"/>
+	        	</rich:column>
+	        	
+	        	<rich:column>
+	        		<f:facet name="header">Action</f:facet>
+	        		<a4j:commandLink id="add-search-result"
+	        				action="#{editVideoController.persist( movie )}"
+	        				render=":video-overview:video-list :video-overview:video-list-scroller"
+	        				oncomplete="#{rich:component('search-popup')}.hide();">
+	        			<h:graphicImage library="img" name="plus-button.png" alt="add"/>
+	        		</a4j:commandLink>
+	        	</rich:column>
+	        </rich:dataTable>
+		</rich:popupPanel>
+	</h:form>
+</ui:composition>
+    
+</html>
