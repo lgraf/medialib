@@ -16,11 +16,33 @@
      <h:outputStylesheet library="css" name="layout.css"/>
      <h:outputStylesheet library="css" name="default.css"/>
      
+     <h:outputScript name="jsf.js" library="javax.faces"/>
+     <h:outputScript name="jquery.js"/>
      <script type="text/javascript" charset="UTF-8">
      	function requestContainsError()
      	{
-     		return document.getElementById('maximumSeverity').value >= 2;
+     		return jQuery( '#maximumSeverity' ).value >= 2;
      	}
+     	
+     	
+     	var value;
+     	jsf.ajax.addOnEvent( function( data )
+     	{
+     		if( 'begin' === data.status )
+     		{
+				value = data.source.value;
+				jQuery( data.source ).attr( 'disabled', 'disabled' );
+				jQuery( data.source ).attr( 'value', 'Loading ...' );
+				return;
+     		}
+     		
+     		if( 'complete' === data.status )
+     		{
+     			jQuery( data.source ).removeAttr( 'disabled' );
+     			jQuery( data.source ).attr( 'value', value );
+     			return;
+     		}
+     	});
      </script>
 </h:head>
 

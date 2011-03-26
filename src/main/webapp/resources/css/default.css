@@ -11,6 +11,11 @@ input
 	padding:2px;	
 }
 
+button, input[type="reset"], input[type="submit"], input[type="button"]
+{
+	min-width:60px;
+}
+
 .h1 
 {
 	font-size:1.2em;
