@@ -40,7 +40,7 @@ abstract class Content extends Persistable
 	@Temporal( TemporalType.DATE )
 	private Date releaseDate;
 
-	private double runtime;
+	private int runtime;
 
 
 	public Medium getMedium()
@@ -103,13 +103,13 @@ abstract class Content extends Persistable
 	}
 
 
-	public double getRuntime()
+	public int getRuntime()
 	{
 		return runtime;
 	}
 
 
-	public void setRuntime( double runtime )
+	public void setRuntime( int runtime )
 	{
 		this.runtime = runtime;
 	}
