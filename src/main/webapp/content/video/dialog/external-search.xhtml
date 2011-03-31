@@ -54,7 +54,7 @@
 	        	<rich:column>
 	        		<f:facet name="header">Action</f:facet>
 	        		<a4j:commandLink id="add-search-result"
-	        				action="#{editVideoController.persist( movie )}"
+	        				action="#{videoDetailController.create( movie )}"
 	        				render=":video-overview:video-list :video-overview:video-list-scroller"
 	        				oncomplete="#{rich:component('search-popup')}.hide();">
 	        			<h:graphicImage library="img" name="plus-button.png" alt="add"/>

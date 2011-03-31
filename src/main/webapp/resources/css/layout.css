@@ -33,3 +33,8 @@
 	color:grey;
    	height:20px;
 }
+
+.valign-top
+{
+	vertical-align:top;
+}

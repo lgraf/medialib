@@ -10,6 +10,7 @@
 
 <ui:composition template="../template/layout.xhtml">
 	<ui:define name="dialogs">
+		<ui:include src="./dialog/detail.xhtml"/>
 		<ui:include src="./dialog/external-search.xhtml"/>
 	</ui:define>
 	
@@ -21,12 +22,7 @@
 	        		rows="10"
 	        		noDataLabel="No videos found ..."
 	        		styleClass="media-table">
-	        	<ui:remove>
-        		<rich:column id="image">
-					<h:graphicImage rendered="#{!empty video.poster}" url="#{video.poster.url}"  width="#{video.poster.width}" height="#{video.poster.height}" style="width:#{video.poster.width};height:#{video.poster.height};"/>
-	        	</rich:column>
-				</ui:remove>
-				
+	
 	        	<rich:column id="id">
 	        		<f:facet name="header">ID</f:facet>
 	        		<h:outputText value="#{video.id}"/>

@@ -53,4 +53,10 @@ public class VideoContentService
 		em.persist( toPersist );
 	}
 
+
+	public VideoContent update( VideoContent toUpdate )
+	{
+		return em.merge( toUpdate );
+	}
+
 }
