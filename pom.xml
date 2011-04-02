@@ -113,6 +113,6 @@
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <org.richfaces.version>4.0.0.20110227-CR1</org.richfaces.version>
+        <org.richfaces.version>4.0.0.Final</org.richfaces.version>
     </properties>
 </project>
