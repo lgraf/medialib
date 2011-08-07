@@ -22,14 +22,15 @@
 			</f:facet>
 			<f:facet name="controls">
 				<h:commandLink id="close-search-popup" action="#{videoDetailController.setEditMode( false )}">
-					<h:graphicImage library="img" name="cross-small.png"/>
+					<h:graphicImage id="close-icon" library="img" name="cross-small.png" alt="close"/>
 					<a4j:ajax execute="@this" render="content" oncomplete="#{rich:component('detail-video-popup')}.hide();"/>
 				</h:commandLink>
 			</f:facet>
 			
 			<h:panelGroup id="content">
 				<h:panelGrid id="image-grid" columns="2" columnClasses="valign-top,valign-top">
-					<h:graphicImage rendered="#{!empty videoDetailController.selected.poster}" url="#{videoDetailController.selected.poster.url}"  width="#{videoDetailController.selected.poster.width}" height="#{videoDetailController.selected.poster.height}" style="width:#{videoDetailController.selected.poster.width};height:#{videoDetailController.selected.poster.height};"/>
+					<h:graphicImage id="image" rendered="#{!empty videoDetailController.selected.poster}" url="#{videoDetailController.selected.poster.url}" alt="#{videoDetailController.selected.title}" width="#{videoDetailController.selected.poster.width}" height="#{videoDetailController.selected.poster.height}" style="width:#{videoDetailController.selected.poster.width};height:#{videoDetailController.selected.poster.height};"/>
+					<h:panelGroup id="image-fallback" rendered="#{empty videoDetailController.selected.poster}"/>
 					<h:panelGroup layout="block" style="padding-left:10px;">
 						<cc:editableText id="title" value="#{videoDetailController.selected.title}" editState="#{videoDetailController.editMode}"/>
 						<br/><br/>

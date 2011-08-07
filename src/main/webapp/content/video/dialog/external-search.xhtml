@@ -19,7 +19,7 @@
 			<f:facet name="header">Add Movie</f:facet>
 			<f:facet name="controls">
 				<h:commandLink id="close-search-popup" onclick="#{rich:component('search-popup')}.hide();return false;">
-					<h:graphicImage library="img" name="cross-small.png"/>
+					<h:graphicImage id="close-icon" library="img" name="cross-small.png" alt="close"/>
 				</h:commandLink>
 			</f:facet>
 			
@@ -38,7 +38,7 @@
 							noDataLabel="No Results!"
 							styleClass="media-table">
 				<rich:column id="image">
-					<h:graphicImage rendered="#{!empty movie.poster}" url="#{movie.poster.url}"  width="#{movie.poster.width}" height="#{movie.poster.height}"/>
+					<h:graphicImage rendered="#{!empty movie.poster}" url="#{movie.poster.url}"  alt="#{movie.title}" width="#{movie.poster.width}" height="#{movie.poster.height}"/>
 	        	</rich:column>
 	        	
 	        	<rich:column>
