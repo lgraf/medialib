@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
@@ -15,8 +16,6 @@ import org.luca.medialib.service.ExternalMovieService;
 import org.luca.medialib.service.ExternalServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import be.verborgh.enterprise.context.ViewScoped;
 
 
 /**

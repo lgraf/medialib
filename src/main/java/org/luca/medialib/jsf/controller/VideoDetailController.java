@@ -3,6 +3,7 @@ package org.luca.medialib.jsf.controller;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -11,8 +12,6 @@ import org.luca.medialib.jsf.model.rf.VideoListModel;
 import org.luca.medialib.service.VideoContentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import be.verborgh.enterprise.context.ViewScoped;
 
 
 @Named

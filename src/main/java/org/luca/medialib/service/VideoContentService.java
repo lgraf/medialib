@@ -1,22 +1,23 @@
 package org.luca.medialib.service;
 
+import java.io.Serializable;
 import java.util.List;
 
-import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
+import org.apache.myfaces.extensions.cdi.jpa.api.Transactional;
 import org.luca.medialib.domain.VideoContent;
 
 
 /**
  * @author luc4
  */
-@Stateless
-public class VideoContentService
+@Transactional
+public class VideoContentService implements Serializable
 {
 
-	@PersistenceContext
+	@Inject
 	private EntityManager em;
 
 

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>			  
+  	<Resource name="jdbc/medialib" auth="Container" type="javax.sql.DataSource" driverClassName="com.mysql.jdbc.Driver"
+              maxActive="10" maxIdle="3" maxWait="10000"
+              url="jdbc:mysql://localhost:3306/medialib" username="root" password="fiction"/>
+</Context>
