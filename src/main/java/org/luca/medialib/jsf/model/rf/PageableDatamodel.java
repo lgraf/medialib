@@ -12,6 +12,8 @@ import org.ajax4jsf.model.ExtendedDataModel;
 import org.ajax4jsf.model.Range;
 import org.ajax4jsf.model.SequenceRange;
 import org.luca.medialib.domain.Identifiable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -23,11 +25,13 @@ import org.luca.medialib.domain.Identifiable;
 abstract class PageableDatamodel<T extends Identifiable> extends ExtendedDataModel<T> implements
 		Serializable
 {
+	private static final Logger log = LoggerFactory.getLogger( PageableDatamodel.class );
+
 	private Long currentId;
 
-	private Integer rowCount;
+	private Integer currentRowCount;
 
-	private Range currentRange;
+	private SerializableSequenceRange currentRange = new SerializableSequenceRange();
 
 	// TODO luc4: try to avoid two caches!
 	// needed because we need the cached data in guaranteed order.
@@ -60,7 +64,7 @@ abstract class PageableDatamodel<T extends Identifiable> extends ExtendedDataMod
 	 */
 	public void refresh()
 	{
-		rowCount = getItemCount();
+		currentRowCount = getItemCount();
 		cache = getItemsRanged( currentRange );
 		mapCache.clear();
 		for ( T item : cache )
@@ -99,11 +103,13 @@ abstract class PageableDatamodel<T extends Identifiable> extends ExtendedDataMod
 	@Override
 	public void walk( FacesContext context, DataVisitor visitor, Range range, Object argument )
 	{
-		if ( hasRangeChanged( currentRange, range ) )
+		final SerializableSequenceRange nextRange = new SerializableSequenceRange(
+				(SequenceRange) range );
+		if ( hasRangeChanged( currentRange, nextRange ) )
 		{
-			cache = getItemsRanged( range );
+			currentRange = new SerializableSequenceRange( nextRange );
+			cache = getItemsRanged( nextRange );
 			mapCache.clear();
-			currentRange = range;
 		}
 
 		for ( T item : cache )
@@ -117,11 +123,11 @@ abstract class PageableDatamodel<T extends Identifiable> extends ExtendedDataMod
 	@Override
 	public int getRowCount()
 	{
-		if ( null == rowCount )
+		if ( null == currentRowCount )
 		{
-			rowCount = getItemCount();
+			currentRowCount = getItemCount();
 		}
-		return rowCount;
+		return currentRowCount;
 	}
 
 
@@ -193,27 +199,25 @@ abstract class PageableDatamodel<T extends Identifiable> extends ExtendedDataMod
 	}
 
 
-	private List<T> getItemsRanged( Range currentRange )
+	private boolean hasRangeChanged( SerializableSequenceRange current,
+			SerializableSequenceRange next )
 	{
-		int start = ((SequenceRange) currentRange).getFirstRow();
-		int size = ((SequenceRange) currentRange).getRows();
-		return getItemsRanged( start, size );
+		boolean changed = false;
+		if ( !current.equals( next ) )
+		{
+			log.debug( "Current range has changed! Current was: {} | Next is: {}", currentRange,
+					next );
+			changed = true;
+		}
+		return changed;
 	}
 
 
-	private boolean hasRangeChanged( Range currentRange, Range newRange )
+	private List<T> getItemsRanged( SerializableSequenceRange currentRange )
 	{
-		if ( (null == currentRange && null != newRange)
-				|| (null != currentRange && null == newRange) )
-		{
-			return true;
-		}
-		else
-		{
-			SequenceRange s1 = (SequenceRange) currentRange;
-			SequenceRange s2 = (SequenceRange) newRange;
-			return s1.getFirstRow() != s2.getFirstRow() || s1.getRows() != s2.getRows();
-		}
+		final int start = currentRange.getFirstRow();
+		final int size = currentRange.getRows();
+		return getItemsRanged( start, size );
 	}
 
 }
