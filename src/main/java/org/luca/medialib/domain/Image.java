@@ -1,6 +1,7 @@
 package org.luca.medialib.domain;
 
 import java.awt.Dimension;
+import java.io.Serializable;
 
 import javax.persistence.Embeddable;
 
@@ -12,7 +13,7 @@ import javax.persistence.Embeddable;
  * @author luc4
  */
 @Embeddable
-public class Image
+public class Image implements Serializable
 {
 
 	private String name;
