@@ -40,20 +40,14 @@ public class VideoDetailController implements Serializable
 
 	public void create( VideoContent toPersist )
 	{
-		log.debug( "Persist new video {}!", toPersist );
 		videoContentService.persist( toPersist );
-
-		log.debug( "Refresh model {}!", videoListModel );
 		videoListModel.refresh();
 	}
 
 
 	public void update()
 	{
-		log.debug( "Update video {}!", selected );
 		selected = videoContentService.update( selected );
-
-		log.debug( "Refresh model {}!", videoListModel );
 		videoListModel.refresh();
 
 		editMode = false;

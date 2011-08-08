@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 
 import org.apache.myfaces.extensions.cdi.jpa.api.Transactional;
 import org.luca.medialib.domain.VideoContent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -16,6 +18,7 @@ import org.luca.medialib.domain.VideoContent;
 @Transactional
 public class VideoContentService implements Serializable
 {
+	private static final Logger log = LoggerFactory.getLogger( VideoContentService.class );
 
 	@Inject
 	private EntityManager em;
@@ -51,12 +54,14 @@ public class VideoContentService implements Serializable
 
 	public void persist( VideoContent toPersist )
 	{
+		log.debug( "Persist new video {} ...", toPersist );
 		em.persist( toPersist );
 	}
 
 
 	public VideoContent update( VideoContent toUpdate )
 	{
+		log.debug( "Update video {} ... ", toUpdate );
 		return em.merge( toUpdate );
 	}
 

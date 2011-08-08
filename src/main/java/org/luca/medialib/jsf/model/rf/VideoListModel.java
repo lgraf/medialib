@@ -44,7 +44,7 @@ public class VideoListModel extends PageableDatamodel<VideoContent>
 	@Override
 	protected int getItemCount()
 	{
-		log.debug( "getItemCount() called" );
+		log.debug( "getItemCount() called!" );
 		return videoContentService.count().intValue();
 	}
 

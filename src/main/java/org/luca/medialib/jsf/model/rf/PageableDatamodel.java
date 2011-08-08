@@ -64,6 +64,7 @@ abstract class PageableDatamodel<T extends Identifiable> extends ExtendedDataMod
 	 */
 	public void refresh()
 	{
+		log.debug( "Refreshing model {} ...", this );
 		currentRowCount = getItemCount();
 		cache = getItemsRanged( currentRange );
 		mapCache.clear();
