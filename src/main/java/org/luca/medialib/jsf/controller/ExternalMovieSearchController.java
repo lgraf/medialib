@@ -51,7 +51,7 @@ public class ExternalMovieSearchController implements Serializable
 	}
 
 
-	public String search()
+	public void search()
 	{
 		try
 		{
@@ -62,7 +62,6 @@ public class ExternalMovieSearchController implements Serializable
 			log.warn( "error while movie search! ", e );
 			// TODO luc4: handle exception
 		}
-		return null;
 	}
 
 
