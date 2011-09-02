@@ -52,7 +52,7 @@
 					<f:ajax execute="@this" render="content"/>
 				</h:commandButton>
 				<h:commandButton id="save-btn" rendered="#{videoDetailController.editMode}" action="#{videoDetailController.update}" value="save">
-					<f:ajax execute="@form" render="content"/>
+					<f:ajax execute="@form" render="content video-overview:video-list"/>
 				</h:commandButton>
 				<h:commandButton id="cancel-btn" rendered="#{videoDetailController.editMode}" action="#{videoDetailController.setEditMode( false )}" value="cancel">
 					<f:ajax execute="@this" render="content"/>
