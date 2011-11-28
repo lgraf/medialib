@@ -20,10 +20,11 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Inheritance( strategy = InheritanceType.JOINED )
-abstract class Content extends Persistable
+public abstract class Content extends Persistable
 {
 
-	// TODO luc4: this is not the natural relation between content and medium (normally a medium has content ...)
+	// TODO luc4: this is not the natural relation between content and medium (normally a medium has
+	// content ...)
 	@Enumerated( EnumType.STRING )
 	private Medium medium;
 
