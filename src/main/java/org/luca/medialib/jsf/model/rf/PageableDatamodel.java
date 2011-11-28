@@ -17,14 +17,15 @@ import org.slf4j.LoggerFactory;
 
 
 /**
- * Abstract pageable and data provider unaware datamodel.
+ * Abstract pageable and data provider unaware datamodel.<br/>
  * Based on: http://gochev.blogspot.com/2009/08/richfaces-server-side-paging-with.html.
  * 
  * @author luc4
  */
-abstract class PageableDatamodel<T extends Identifiable> extends ExtendedDataModel<T> implements
-		Serializable
+public abstract class PageableDatamodel<T extends Identifiable> extends ExtendedDataModel<T>
+		implements Serializable
 {
+
 	private static final Logger log = LoggerFactory.getLogger( PageableDatamodel.class );
 
 	private Long currentId;
@@ -133,8 +134,8 @@ abstract class PageableDatamodel<T extends Identifiable> extends ExtendedDataMod
 
 
 	/**
-	 * This is main way to obtain data row. It is intensively used by framework.
-	 * We strongly recommend use of local cache in that method.
+	 * This is main way to obtain data row. It is intensively used by framework. We strongly
+	 * recommend use of local cache in that method.
 	 */
 	@Override
 	public T getRowData()

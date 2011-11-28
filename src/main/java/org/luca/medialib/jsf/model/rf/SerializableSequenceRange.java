@@ -7,15 +7,14 @@ import org.ajax4jsf.model.SequenceRange;
 
 
 /**
- * This helper class can be used if an {@link Serializable} version of
- * org.ajax4jsf.model.SequenceRange is needed.
- * The org.ajax4jsf.model.SequenceRange class doesn't implement the {@link Serializable} interface.
+ * {@link Serializable} version of {@link SequenceRange}.<br/>
  * Additionally this class implements a value based equals and hashCode method.
  * 
  * @author luc4
  */
 public final class SerializableSequenceRange extends SequenceRange implements Serializable
 {
+
 	public SerializableSequenceRange()
 	{
 		super();
@@ -84,7 +83,8 @@ public final class SerializableSequenceRange extends SequenceRange implements Se
 	@Override
 	public String toString()
 	{
-		return "SerializableSequenceRange [firstRow=" + getFirstRow() + ", rows=" + getRows() + "]";
+		return getClass().getSimpleName() + "[firstRow=" + getFirstRow() + ", rows=" + getRows()
+				+ "]";
 	}
 
 }

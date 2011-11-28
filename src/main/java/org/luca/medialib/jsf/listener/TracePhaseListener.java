@@ -13,9 +13,8 @@ import org.slf4j.LoggerFactory;
 
 
 /**
- * PhaseListener for debugging the JSF-Lifecycle.
+ * PhaseListener for debugging the JSF-Lifecycle.<br/>
  * Note: It seems that listeners are shared between requests!
- * So use this listener only in a controlled dev environment, never in production!
  * 
  * @author luc4
  */
@@ -26,6 +25,7 @@ public class TracePhaseListener implements PhaseListener
 
 	private long phaseTimer;
 	private long requestTimer;
+
 
 	@Override
 	public void beforePhase( PhaseEvent pe )
@@ -41,6 +41,7 @@ public class TracePhaseListener implements PhaseListener
 		log.debug( "Begin JSF-Phase({})!", pe.getPhaseId() );
 	}
 
+
 	@Override
 	public void afterPhase( PhaseEvent pe )
 	{
@@ -53,6 +54,7 @@ public class TracePhaseListener implements PhaseListener
 			log.debug( "+++ End of Request reached! [{}]ms +++", requestTimer );
 		}
 	}
+
 
 	@Override
 	public PhaseId getPhaseId()

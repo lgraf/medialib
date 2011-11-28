@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 @Transactional
 public class VideoContentService implements Serializable
 {
+
 	private static final Logger log = LoggerFactory.getLogger( VideoContentService.class );
 
 	@Inject

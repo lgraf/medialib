@@ -7,8 +7,7 @@ import javax.persistence.Embeddable;
 
 
 /**
- * Represents an Image.
- * TODO luc4: support local stored images too
+ * Represents an Image. TODO luc4: support local stored images too
  * 
  * @author luc4
  */
