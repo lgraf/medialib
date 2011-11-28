@@ -1,5 +1,6 @@
 package org.luca.medialib.service;
 
+import java.awt.Dimension;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -70,7 +71,7 @@ public class TMDbMovieService implements ExternalMovieService, Serializable
 		}
 
 		Movie converted = new Movie();
-		//TODO luc4: add all related fields
+		// TODO luc4: add all related fields
 		converted.setTitle( base.getName() );
 		converted.setReleaseDate( base.getReleasedDate() );
 		converted.setRuntime( base.getRuntime() );
@@ -80,11 +81,14 @@ public class TMDbMovieService implements ExternalMovieService, Serializable
 		if ( it.hasNext() )
 		{
 			MoviePoster poster = base.getImages().posters.iterator().next();
-			Image moviePoster = new Image();
-			moviePoster.setName( poster.getID() );
-			moviePoster.setUrl( poster.getSmallestImage().toString() );
-			moviePoster.setDimension( poster.getSmallestImageDimension() );
-			converted.setPoster( moviePoster );
+			int width = poster.getSmallestImageDimension().getWidth();
+			int height = poster.getSmallestImageDimension().getHeight();
+
+			Image image = new Image();
+			image.setName( poster.getID() );
+			image.setUrl( poster.getSmallestImage().toString() );
+			image.setDimension( new Dimension( width, height ) );
+			converted.setPoster( image );
 		}
 		return converted;
 	}
