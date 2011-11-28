@@ -23,13 +23,14 @@ import org.slf4j.LoggerFactory;
 @ApplicationScoped
 public class EntityManagerProducer
 {
+
 	private static final Logger log = LoggerFactory.getLogger( EntityManagerProducer.class );
 
 	private EntityManagerFactory emf;
 
 
 	@PostConstruct
-	private void initialize()
+	void initialize()
 	{
 		log.debug( "Create EntityManagerFactory ..." );
 		emf = Persistence.createEntityManagerFactory( "mediaLibPU" );
@@ -38,7 +39,7 @@ public class EntityManagerProducer
 
 
 	@PreDestroy
-	private void release()
+	void release()
 	{
 		log.debug( "Releasing EntityManagerFactory ..." );
 		if ( null != emf && emf.isOpen() )

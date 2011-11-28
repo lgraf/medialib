@@ -16,10 +16,8 @@ import org.slf4j.LoggerFactory;
 /**
  * Pagable model for {@link VideoContent}.
  * 
- * Note:
- * JSF restore/save the state for datatables on Phase 1/6!
- * This implies to initialize the model on each request.
- * Also when we use execute/render for ajax requests to "exclud the table!
+ * Note: JSF restore/save the state for datatables on Phase 1/6! This implies to initialize the
+ * model on each request. Also when we use execute/render for ajax requests to "exclud the table!
  * 
  * @author luc4
  */
@@ -35,7 +33,7 @@ public class VideoListModel extends PageableDatamodel<VideoContent>
 
 
 	@PostConstruct
-	private void init()
+	void init()
 	{
 		log.debug( "Initialize via @PostConstruct ..." );
 	}

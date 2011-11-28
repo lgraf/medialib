@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 @ViewScoped
 public class VideoDetailController implements Serializable
 {
+
 	private static final Logger log = LoggerFactory.getLogger( VideoDetailController.class );
 
 	@Inject
@@ -32,7 +33,7 @@ public class VideoDetailController implements Serializable
 
 
 	@PostConstruct
-	private void init()
+	void init()
 	{
 		log.debug( "Initialize via @PostConstruct ..." );
 	}

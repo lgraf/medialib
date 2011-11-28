@@ -19,9 +19,8 @@ import org.slf4j.LoggerFactory;
 
 
 /**
- * TODO luc4: think about scope.
- * ViewScope is needed because we use commandlinks in the table. We need the state for following
- * requests to know the clicked row.
+ * TODO luc4: think about scope. ViewScope is needed because we use commandlinks in the table. We
+ * need the state for following requests to know the clicked row.
  * 
  * How we can avoid this? This will not scale well.
  * 
@@ -45,7 +44,7 @@ public class ExternalMovieSearchController implements Serializable
 
 
 	@PostConstruct
-	private void init()
+	void init()
 	{
 		log.debug( "Initialize via @PostConstruct ..." );
 	}
